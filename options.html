@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Next to Current Tab Options</title>
-</head>
-<body>
-  <div>
-    <label for="position">Position of new tab:</label>
-    <select id="position">
-      <option value="after">After active</option>
-      <option value="end">At end</option>
-      <option value="start">At start</option>
-    </select>
-  </div>
-  <div>
-    <label>
-      <input type="checkbox" id="avoidGroups"> Avoid tab groups
-    </label>
-  </div>
-  <script src="options.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Next to Current Tab Options</title>
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Next to Current Tab</h1>
+      <div class="field">
+        <label for="position">Position of new tab</label>
+        <select id="position">
+          <option value="after">After active</option>
+          <option value="end">At end</option>
+          <option value="start">At start</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>
+          <input type="checkbox" id="avoidGroups"> Avoid tab groups
+        </label>
+      </div>
+    </div>
+    <script src="options.js"></script>
+  </body>
 </html>

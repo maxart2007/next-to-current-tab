@@ -8,8 +8,12 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 });
 
 chrome.tabs.onCreated.addListener((tab) => {
+  // Capture the last active tab before any asynchronous operations run so we
+  // always have the tab that spawned this one, even if the new tab becomes
+  // active immediately.
+  const last = lastActiveTab[tab.windowId];
+
   chrome.storage.sync.get({ position: 'after', avoidGroups: false }, (prefs) => {
-    const last = lastActiveTab[tab.windowId];
 
     if (prefs.position === 'start') {
       chrome.tabs.move(tab.id, { index: 0 });
@@ -24,7 +28,11 @@ chrome.tabs.onCreated.addListener((tab) => {
     if (last && typeof last.index === 'number') {
       if (prefs.avoidGroups && last.groupId >= 0) {
         chrome.tabs.query({ groupId: last.groupId, windowId: tab.windowId }, (groupTabs) => {
-          const maxIndex = Math.max(...groupTabs.map((t) => t.index));
+          // Fallback to the last known index if the group has no tabs for some
+          // reason to avoid moving the tab to the end.
+          const maxIndex = groupTabs.length
+            ? Math.max(...groupTabs.map((t) => t.index))
+            : last.index;
           chrome.tabs.move(tab.id, { index: maxIndex + 1 });
         });
       } else {
