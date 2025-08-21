@@ -3,12 +3,16 @@
   "name": "Next to Current Tab",
   "version": "1.0.0",
   "description": "Always open new tabs next to the current active tab",
-  "permissions": ["tabs"],
+  "permissions": ["tabs", "storage"],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
     "default_title": "Next to Current Tab"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
   }
 }
 
