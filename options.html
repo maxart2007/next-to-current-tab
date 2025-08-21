@@ -17,9 +17,13 @@
         </select>
       </div>
       <div class="field">
-        <label>
-          <input type="checkbox" id="avoidGroups"> Avoid tab groups
-        </label>
+        <label for="groupPosition">Position of new tab in groups</label>
+        <select id="groupPosition">
+          <option value="after">After current one</option>
+          <option value="first">First</option>
+          <option value="last">Last</option>
+          <option value="avoid">Avoid groups</option>
+        </select>
       </div>
     </div>
     <script src="options.js"></script>

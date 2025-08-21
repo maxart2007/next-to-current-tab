@@ -3,8 +3,9 @@
 Chromium extension that ensures new tabs open to the right of the current active tab.
 
 An options page allows customizing the position of new tabs (after the active tab,
-at the start, or at the end) and whether a tab opened from within a tab group
-should instead appear after the entire group.
+at the start, or at the end) and how tabs opened from within a tab group are
+placed: after the current one, at the beginning or end of the group, or outside
+the group entirely.
 
 ## Development
 

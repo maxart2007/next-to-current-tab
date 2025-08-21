@@ -13,7 +13,7 @@ chrome.tabs.onCreated.addListener((tab) => {
   // active immediately.
   const last = lastActiveTab[tab.windowId];
 
-  chrome.storage.sync.get({ position: 'after', avoidGroups: false }, (prefs) => {
+  chrome.storage.sync.get({ position: 'after', groupPosition: 'after' }, (prefs) => {
 
     if (prefs.position === 'start') {
       chrome.tabs.move(tab.id, { index: 0 });
@@ -26,14 +26,34 @@ chrome.tabs.onCreated.addListener((tab) => {
     }
 
     if (last && typeof last.index === 'number') {
-      if (prefs.avoidGroups && last.groupId >= 0) {
-        chrome.tabs.query({ groupId: last.groupId, windowId: tab.windowId }, (groupTabs) => {
+      const groupId = last.groupId;
+
+      if (prefs.groupPosition === 'avoid' && groupId >= 0) {
+        chrome.tabs.query({ groupId, windowId: tab.windowId }, (groupTabs) => {
           // Fallback to the last known index if the group has no tabs for some
           // reason to avoid moving the tab to the end.
           const maxIndex = groupTabs.length
             ? Math.max(...groupTabs.map((t) => t.index))
             : last.index;
           chrome.tabs.move(tab.id, { index: maxIndex + 1 });
+        });
+      } else if (prefs.groupPosition === 'first' && groupId >= 0) {
+        chrome.tabs.query({ groupId, windowId: tab.windowId }, (groupTabs) => {
+          const minIndex = groupTabs.length
+            ? Math.min(...groupTabs.map((t) => t.index))
+            : last.index;
+          chrome.tabs.group({ groupId, tabIds: tab.id }, () => {
+            chrome.tabs.move(tab.id, { index: minIndex });
+          });
+        });
+      } else if (prefs.groupPosition === 'last' && groupId >= 0) {
+        chrome.tabs.query({ groupId, windowId: tab.windowId }, (groupTabs) => {
+          const maxIndex = groupTabs.length
+            ? Math.max(...groupTabs.map((t) => t.index))
+            : last.index;
+          chrome.tabs.group({ groupId, tabIds: tab.id }, () => {
+            chrome.tabs.move(tab.id, { index: maxIndex + 1 });
+          });
         });
       } else {
         chrome.tabs.move(tab.id, { index: last.index + 1 });
