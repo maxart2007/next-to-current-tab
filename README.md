@@ -14,8 +14,14 @@ the group entirely.
 
 ## Bundling
 
-To create a distributable archive:
+To create a distributable archive that can be uploaded to the Chrome Web Store:
 
 ```bash
-zip -r next-to-current-tab.zip manifest.json background.js options.html options.js README.md
+zip -r next-to-current-tab.zip \
+  manifest.json background.js options.html options.css options.js \
+  icons images README.md
 ```
+
+The `icons/` directory contains the extension icons used by the browser and the
+Web Store listing. Marketing assets for the Chrome Web Store are located in the
+`images/` directory.
