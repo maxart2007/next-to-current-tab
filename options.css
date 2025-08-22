@@ -25,8 +25,10 @@ h1 {
   margin-bottom: 16px;
 }
 
-label {
+.label {
   font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
 }
 
 select {
@@ -34,6 +36,7 @@ select {
   padding: 6px 8px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  width: 100%;
 }
 
 input[type="checkbox"] {
