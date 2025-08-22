@@ -9,21 +9,17 @@
     <div class="container">
       <h1>Next to Current Tab</h1>
       <div class="field">
-        <div class="label">Position of new tab</div>
-        <select id="position">
-          <option value="after">After active</option>
-          <option value="start">Open first</option>
-          <option value="end">Open last</option>
-        </select>
+        <div class="label">New tab behaviour</div>
+        <label><input type="radio" name="position" value="after">After active</label>
+        <label><input type="radio" name="position" value="start">Open first</label>
+        <label><input type="radio" name="position" value="end">Open last</label>
       </div>
       <div class="field">
-        <div class="label">Position of new tab in groups</div>
-        <select id="groupPosition">
-          <option value="after">After active</option>
-          <option value="first">Open first</option>
-          <option value="last">Open last</option>
-          <option value="avoid">Avoid groups</option>
-        </select>
+        <div class="label">New tab behaviour in groups</div>
+        <label><input type="radio" name="groupPosition" value="after">After active</label>
+        <label><input type="radio" name="groupPosition" value="first">Open first</label>
+        <label><input type="radio" name="groupPosition" value="last">Open last</label>
+        <label><input type="radio" name="groupPosition" value="avoid">Avoid groups</label>
       </div>
     </div>
     <script src="options.js"></script>
