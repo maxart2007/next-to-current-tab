@@ -6,14 +6,29 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 16px;
 }
 
 .container {
   background: #fff;
-  padding: 24px 32px;
+  padding: 32px 0 16px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  min-width: 260px;
+  min-width: 320px;
+}
+
+.heading {
+  padding: 0 32px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.heading img {
+  margin-bottom: 8px;
+}
+
+.heading {
+  margin-top: -56px;
 }
 
 h1 {
@@ -25,9 +40,13 @@ h1 {
   margin-bottom: 16px;
 }
 
+.field:last-child {
+  margin-bottom: 0;
+}
+
 .label {
   font-weight: 600;
-  padding: 6px 16px;
+  padding: 6px 32px;
   margin-bottom: 4px;
   display: block;
   color: #7b7c6e;
@@ -35,12 +54,12 @@ h1 {
 
 label {
   display: block;
-  padding: 6px 16px;
+  padding: 12px 32px;
   transition: background-color 0.1s ease;
 }
 
 label:hover {
-  background-color: #f0f0f0;
+  background-color: #f4f0f0;
 }
 
 input[type="radio"] {

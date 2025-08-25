@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Next to Current Tab",
+  "name": "New Tab Order",
   "version": "1.0.0",
-  "description": "Always open new tabs next to the current active tab",
-  "permissions": ["tabs", "storage"],
+  "description": "New tabs open exactly where you need them. With special control over tab groups.",
+  "permissions": ["storage"],
   "background": {
     "service_worker": "background.js"
   },
