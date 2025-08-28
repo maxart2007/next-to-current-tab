@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "New Tab Order",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "New tabs open exactly where you need them. With special control over tab groups.",
   "permissions": ["storage"],
   "background": {
