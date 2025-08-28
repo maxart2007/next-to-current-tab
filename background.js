@@ -1,3 +1,49 @@
+// Keep track of the last active tab per window. This is used when a new tab is
+// created without an explicit opener (for example, Cmd+clicking a bookmark).
+const lastActiveTab = {};
+
+// Populate the cache with currently active tabs when the service worker starts
+// so that the very first created tab also has a reference point.
+chrome.tabs.query({ active: true }, (tabs) => {
+  tabs.forEach((tab) => {
+    lastActiveTab[tab.windowId] = {
+      id: tab.id,
+      index: tab.index,
+      groupId: tab.groupId,
+    };
+  });
+});
+
+// Update the cache every time the active tab changes.
+chrome.tabs.onActivated.addListener(({ tabId, windowId }) => {
+  chrome.tabs.get(tabId, (tab) => {
+    lastActiveTab[windowId] = {
+      id: tabId,
+      index: tab.index,
+      groupId: tab.groupId,
+    };
+  });
+});
+
+// Adjust the cached index if the active tab is moved.
+chrome.tabs.onMoved.addListener((tabId, moveInfo) => {
+  const { windowId, toIndex } = moveInfo;
+  const cached = lastActiveTab[windowId];
+  if (cached && cached.id === tabId) {
+    cached.index = toIndex;
+  }
+});
+
+// Keep group information up to date if the active tab is moved in or out of a group.
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (tab.active && typeof changeInfo.groupId !== 'undefined') {
+    const cached = lastActiveTab[tab.windowId];
+    if (cached) {
+      cached.groupId = tab.groupId;
+    }
+  }
+});
+
 chrome.tabs.onCreated.addListener((tab) => {
   const parentTabId = tab.openerTabId;
   const winId = tab.windowId;
