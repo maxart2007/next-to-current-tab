@@ -45,6 +45,13 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 chrome.tabs.onCreated.addListener((tab) => {
+  // When Chrome restores a previous session it re-creates tabs in a discarded
+  // state without an opener. Moving such tabs would break their original
+  // order and tab group assignment, so skip handling for them.
+  if (!tab.openerTabId && tab.discarded) {
+    return;
+  }
+
   const parentTabId = tab.openerTabId;
   const winId = tab.windowId;
 
