@@ -3,7 +3,10 @@
   "name": "New Tab Order",
   "version": "1.0.3",
   "description": "New tabs open exactly where you need them. With special control over tab groups.",
-  "permissions": ["storage", "sessions"],
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
   "background": {
     "service_worker": "background.js"
   },
