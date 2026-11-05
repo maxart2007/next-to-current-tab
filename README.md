@@ -17,8 +17,8 @@ the group entirely.
 To create a distributable archive that can be uploaded to the Chrome Web Store:
 
 ```bash
-zip -r next-to-current-tab.zip \
-  manifest.json background.js options.html options.css options.js \
+zip -r new-tab-order.zip \
+  manifest.json background.js positioning.js options.html options.css options.js \
   icons images README.md
 ```
 
